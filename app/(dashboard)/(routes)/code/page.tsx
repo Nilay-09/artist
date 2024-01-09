@@ -3,7 +3,6 @@
 import axios from "axios";
 import { Code } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { ChatCompletionRequestMessage } from "openai";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -28,7 +27,7 @@ import { formSchema } from "./constants";
 const CodePage = () => {
     const router = useRouter();
     const proModal = useProModal();
-    const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
+    const [messages, setMessages] = useState<any[]>([]);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -41,7 +40,7 @@ const CodePage = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const userMessage: ChatCompletionRequestMessage = { role: "user", content: values.prompt };
+            const userMessage: any = { role: "user", content: values.prompt };
             const newMessages = [...messages, userMessage];
 
             const response = await axios.post('/api/code', { messages: newMessages });
