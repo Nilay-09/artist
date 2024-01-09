@@ -251,3 +251,12 @@ h2 {
 .div19 {
   grid-area: 9 / 2 / 11 / 3;
 }
+
+.polka {
+  background-image:
+    radial-gradient(rgb(217, 217, 217) 12%, transparent 13.6%),
+    radial-gradient(rgb(217, 217, 217) 12%, transparent 13.6%);
+  background-position: 0px 0px, 4px 4px;
+  background-size: 8px 8px;
+  background-color: rgb(255, 255, 255);
+}
