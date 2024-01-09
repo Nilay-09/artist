@@ -260,3 +260,29 @@ h2 {
   background-size: 8px 8px;
   background-color: rgb(255, 255, 255);
 }
+
+/* styles.css */
+/* Style the scrollbar */
+::-webkit-scrollbar {
+  width: 0px;
+  /* Width of the scrollbar */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #2222226c;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2222226c;
+  /* Color of the scrollbar handle */
+  border-radius: 8px;
+  /* Roundness of the scrollbar handle */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+  /* Color of the scrollbar track */
+}

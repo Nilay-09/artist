@@ -21,14 +21,14 @@ const LandingPage = () => {
     }, []);
 
     return (
-        <div className="h-full ">
-            <div className="w-full h-full relative bg-black/70 imageContainer">
+        <div className="h-full w-[100%] overflow-x-hidden">
+            <div className="w-full h-full relative bg-black/70 imageContainer ">
                 <Image
-                    width={1200}
+                    width={1800}
                     height={700}
                     src={backgroundImage}
                     alt="Background"
-                    className="absolute w-screen h-full -z-10 object-cover"
+                    className="absolute w-full h-full -z-10 object-cover"
                 />
                 <LandingNavbar />
                 <LandingHero />
