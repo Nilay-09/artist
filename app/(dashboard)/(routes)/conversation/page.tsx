@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form"
 import { formSchema } from "./constants"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ElementRef, useEffect, useRef, useState } from "react";
-import { ChatCompletionRequestMessage } from "openai";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -35,11 +34,11 @@ const ConversationPage = () => {
     });
 
     const isLoading = form.formState.isSubmitting;
-    const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
+    const [messages, setMessages] = useState<any[]>([]);
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const userMessage: ChatCompletionRequestMessage = { role: "user", content: values.prompt };
+            const userMessage: any = { role: "user", content: values.prompt };
 
             const newMessages = [...messages, userMessage];
 
