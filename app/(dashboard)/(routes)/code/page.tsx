@@ -1,33 +1,33 @@
 "use client";
 
-import * as z from "zod";
 import axios from "axios";
-import { Code, CopyleftIcon } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { ElementRef, useEffect, useRef, useState } from "react";
-import { toast } from "react-hot-toast";
-import ReactMarkdown from "react-markdown";
+import { Code } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ChatCompletionRequestMessage } from "openai";
+import { ElementRef, useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import ReactMarkdown from "react-markdown";
+import * as z from "zod";
 
 import { BotAvatar } from "@/components/botAvatar";
-import { Heading } from "@/components/heading";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { cn } from "@/lib/utils";
-import { Loader } from "@/components/loader";
-import { UserAvatar } from "@/components/user-avatar";
 import { Empty } from "@/components/empty";
-// import { useProModal } from "@/hooks/use-pro-modal";
+import { Heading } from "@/components/heading";
+import { Loader } from "@/components/loader";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { UserAvatar } from "@/components/user-avatar";
+import { useProModal } from "@/hooks/use-pro-modal";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import { formSchema } from "./constants";
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
+import { formSchema } from "./constants";
 
 const CodePage = () => {
     const router = useRouter();
-    // const proModal = useProModal();
+    const proModal = useProModal();
     const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -50,9 +50,11 @@ const CodePage = () => {
             form.reset();
         } catch (error: any) {
             if (error?.response?.status === 403) {
-                // proModal.onOpen();
+                proModal.onOpen();
             } else {
-                toast.error("Something went wrong.");
+                toast.error("Something went wrong.", {
+                    position: "top-right"
+                })
             }
         } finally {
             router.refresh();
@@ -64,7 +66,7 @@ const CodePage = () => {
     }, [messages.length]);
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col min-h-[90vh]">
             <Heading
                 title="Code Generation"
                 description="Generate code using descriptive text."
@@ -72,9 +74,9 @@ const CodePage = () => {
                 iconColor="text-green-700"
                 bgColor="bg-green-700/10"
             />
-            <div className="px-4 overflow-y-auto lg:px-8">
+            <div className="px-4 overflow-y-auto flex-1 lg:px-8">
 
-                <div className="space-y-4 mt-4 min-h-[50vh]">
+                <div className="space-y-4 mt-4 ">
 
                     {messages.length === 0 && !isLoading && (
                         <Empty label="No conversation started." />

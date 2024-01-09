@@ -9,7 +9,7 @@ export const Empty = ({
     label
 }: EmptyProps) => {
     return (
-        <div className="min-h-fit p-20 flex flex-col items-center justify-center">
+        <div className="p-20 h-full flex flex-col items-center justify-center">
             <div className="relative  w-32 h-32 md:h-40 md:w-40">
                 <Image src="/emptyCon.png" fill alt="Empty" />
             </div>

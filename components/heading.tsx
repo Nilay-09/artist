@@ -1,6 +1,7 @@
 import { LucideIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { Montserrat, Poppins } from "next/font/google";
 
 interface HeadingProps {
   title: string;
@@ -9,6 +10,8 @@ interface HeadingProps {
   iconColor?: string;
   bgColor?: string;
 }
+
+const poppins = Montserrat({ weight: '600', subsets: ['latin'] });
 
 export const Heading = ({
   title,
@@ -24,7 +27,7 @@ export const Heading = ({
           <LucideIcon className={cn("w-10 h-10", iconColor)} />
         </div>
         <div>
-          <h2 className="text-3xl font-bold">{title}</h2>
+          <h2 className={cn("text-3xl font-bold text-black", poppins.className)}>{title}</h2>
           <p className="text-sm text-muted-foreground">
             {description}
           </p>

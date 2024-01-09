@@ -19,11 +19,14 @@ import { BotAvatar } from "@/components/botAvatar";
 import { UserAvatar } from "@/components/user-avatar";
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import { Loader } from "@/components/loader";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 
 const ConversationPage = () => {
 
+
     const router = useRouter();
+    const proModal = useProModal();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -47,9 +50,11 @@ const ConversationPage = () => {
             form.reset();
         } catch (error: any) {
             if (error?.response?.status === 403) {
-                // proModal.onOpen();
+                proModal.onOpen();
             } else {
-                toast.error("Something went wrong.");
+                toast.error("Something went wrong.", {
+                    position: "top-right"
+                })
             }
         } finally {
             router.refresh();
@@ -62,8 +67,8 @@ const ConversationPage = () => {
 
 
     return (
-        <div className="flex flex-col"
-            >
+        <div className="flex flex-col min-h-[90vh]"
+        >
             <Heading
                 title="Conversation"
                 description="Our most advanced conversation model."
@@ -71,17 +76,17 @@ const ConversationPage = () => {
                 iconColor="text-violet-500"
                 bgColor="bg-violet-500/10"
             />
-            <div className="px-4 lg:px-8  overflow-y-auto">
+            <div className="px-4 lg:px-8 flex-1 overflow-y-auto">
                 {/* messages  */}
-                <div className="space-y-4 mt-4 min-h-[50vh]">
+                <div className="space-y-4 mt-4">
 
                     {messages.length === 0 && !isLoading && (
                         <Empty label="No conversation started." />
                     )}
                     <div className="flex flex-col-reverse gap-y-4">
-                        {messages.map((message) => (
+                        {messages.map((message, index) => (
                             <div
-                                key={message.content}
+                                key={`${message.content}-${index}`}
                                 className={cn(
                                     "p-8 w-full flex items-start gap-x-8 rounded-lg",
                                     message.role === "user" ? "bg-white border border-black/10" : " bg-violet-500/10",
@@ -114,7 +119,7 @@ const ConversationPage = () => {
                                 <FormItem className="col-span-12 lg:col-span-10">
                                     <FormControl className="m-0 p-0">
                                         <Input
-                                            className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
+                                            className=" w-full border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                                             disabled={isLoading}
                                             placeholder="Explain the function of leaves in a plant's life."
                                             autoComplete="off"

@@ -22,13 +22,16 @@ import { Loader } from "@/components/loader";
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardFooter } from "@/components/ui/card";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 import Image from "next/image";
+
 
 
 const ImageGenerationPage = () => {
 
     const router = useRouter();
+    const proModal = useProModal();
     const [photos, setPhotos] = useState<string[]>([]);
 
 
@@ -54,9 +57,11 @@ const ImageGenerationPage = () => {
             setPhotos(urls);
         } catch (error: any) {
             if (error?.response?.status === 403) {
-                // proModal.onOpen();
+                proModal.onOpen();
             } else {
-                toast.error("Something went wrong.");
+                toast.error("Something went wrong.", {
+                    position: "top-right"
+                })
             }
         } finally {
             router.refresh();
