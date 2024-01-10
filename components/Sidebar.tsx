@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Montserrat } from 'next/font/google'
-import { Code, ImageIcon, LayoutDashboard, MessageSquare, Music, Settings, VideoIcon } from "lucide-react";
+import { Code, ImageIcon, LayoutDashboard, MessageSquare, Music, Settings, VideoIcon,Paintbrush } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
@@ -27,10 +27,16 @@ const routes = [
         color: "text-violet-500",
     },
     {
-        label: 'Image Generation',
+        label: 'DALL-E',
         icon: ImageIcon,
         color: "text-pink-700",
         href: '/image',
+    },
+    {
+        label: 'Pablo Picasso',
+        icon: Paintbrush,
+        color: "text-blue-700",
+        href: '/picasso',
     },
     {
         label: 'Video Generation',
@@ -68,7 +74,7 @@ export const Sidebar = ({
 
 
     return (
-        <div className="space-y-4 py-4 flex flex-col h-full bg-black/80 text-white relative">
+        <div className="space-y-4 py-4 flex flex-col h-full bg-black/80 text-white relative overflow-y-auto">
             <Image
                 width={400}
                 height={900}
